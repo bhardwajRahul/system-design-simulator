@@ -11,12 +11,15 @@ import { useIsCoarsePointer } from "@/hooks/useBreakpoint";
 
 type ComponentNode = Node<ComponentNodeData, "component">;
 
-const CATEGORY_COLORS: Record<string, { border: string; icon: string }> = {
-  networking: { border: "border-zinc-700", icon: "text-blue-400" },
-  compute: { border: "border-zinc-700", icon: "text-violet-400" },
-  storage: { border: "border-zinc-700", icon: "text-amber-400" },
-  messaging: { border: "border-zinc-700", icon: "text-emerald-400" },
-  infrastructure: { border: "border-zinc-700", icon: "text-cyan-400" },
+// Each category gets a crisp, tinted icon "chip" so node types are
+// distinguishable at a glance — the identity lives in the chip, not a heavy
+// border, keeping the canvas calm (Linear/Railway-style).
+const CATEGORY_COLORS: Record<string, { chip: string; icon: string; ring: string }> = {
+  networking: { chip: "bg-blue-500/10", icon: "text-blue-400", ring: "ring-blue-500/25" },
+  compute: { chip: "bg-violet-500/10", icon: "text-violet-400", ring: "ring-violet-500/25" },
+  storage: { chip: "bg-amber-500/10", icon: "text-amber-400", ring: "ring-amber-500/25" },
+  messaging: { chip: "bg-emerald-500/10", icon: "text-emerald-400", ring: "ring-emerald-500/25" },
+  infrastructure: { chip: "bg-cyan-500/10", icon: "text-cyan-400", ring: "ring-cyan-500/25" },
 };
 
 const STATUS_DOT: Record<string, string> = {
@@ -77,22 +80,25 @@ function ComponentNodeInner({ id, data, selected }: NodeProps<ComponentNode>) {
   return (
     <div
       className={`
-        relative flex flex-col items-center gap-1 rounded-lg border bg-zinc-900 px-4 py-3
-        shadow-sm transition-colors
-        ${isBottleneck ? "border-rose-500/60" : colors.border}
-        ${selected ? "border-cyan-500" : ""}
+        group relative flex flex-col items-center gap-1 rounded-xl border bg-zinc-900/95 px-4 py-3
+        shadow-[var(--shadow-e2)] backdrop-blur-sm transition-all duration-150
+        ${isBottleneck
+          ? "border-rose-500/60 ring-2 ring-rose-500/20"
+          : selected
+            ? "border-cyan-500/80 ring-2 ring-cyan-500/30"
+            : "border-zinc-700/70 hover:border-zinc-600"}
       `}
     >
       {/* Status indicator dot */}
       <div
-        className={`absolute -right-0.5 -top-0.5 h-2 w-2 rounded-full ${statusDot}`}
+        className={`absolute -right-1 -top-1 h-2.5 w-2.5 rounded-full ring-2 ring-zinc-900 ${statusDot}`}
         style={{ animation: status !== 'idle' ? 'status-pulse 2s infinite' : 'none' }}
       />
 
       {/* Icon + Label row */}
-      <div className="flex items-center gap-1.5">
-        <div className={`flex h-6 w-6 items-center justify-center rounded ${colors.icon}`}>
-          <Icon className="h-3.5 w-3.5" />
+      <div className="flex items-center gap-2">
+        <div className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg ring-1 ${colors.chip} ${colors.icon} ${colors.ring}`}>
+          <Icon className="h-4 w-4" />
         </div>
         {editing ? (
           <input

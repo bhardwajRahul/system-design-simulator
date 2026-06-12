@@ -18,6 +18,18 @@ import { useCanvasStore, type ComponentNodeData } from "@/store/canvasStore";
 import { usePenStore } from "@/store/penStore";
 import { getComponentById } from "@/data/components";
 import { BookOpen, GraduationCap, Layers, Lock, MousePointer2, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+
+// Orchestrated staggered reveal for the empty state — one deliberate page-load
+// moment rather than scattered micro-animations.
+const emptyContainer = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.08, delayChildren: 0.04 } },
+};
+const emptyItem = {
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.45, ease: [0.16, 1, 0.3, 1] as const } },
+};
 import { CanvasTabBar } from "./CanvasTabBar";
 import { PenOverlay } from "./PenOverlay";
 import { PenToolbar } from "./PenToolbar";
@@ -213,20 +225,28 @@ export function DesignCanvas({ onPickProblem, onLoadReference, onStartInterview 
       {/* Welcome / empty state */}
       {isEmpty && (
         <div className="pointer-events-none absolute inset-0 flex items-center justify-center px-4 pb-4 md:pb-0">
-          <div className="pointer-events-auto flex w-full max-w-lg flex-col items-center gap-6 text-center">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-transparent shadow-[0_0_40px_-10px_rgba(6,182,212,0.4)]">
+          <motion.div
+            variants={emptyContainer}
+            initial="hidden"
+            animate="show"
+            className="pointer-events-auto flex w-full max-w-lg flex-col items-center gap-6 text-center"
+          >
+            <motion.div
+              variants={emptyItem}
+              className="relative flex h-14 w-14 items-center justify-center rounded-2xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/10 to-transparent shadow-[0_0_40px_-10px_rgba(6,182,212,0.4)]"
+            >
               <Layers className="h-6 w-6 text-cyan-400" />
-            </div>
-            <div className="space-y-1.5">
+            </motion.div>
+            <motion.div variants={emptyItem} className="space-y-1.5">
               <h1 className="text-base font-semibold tracking-tight text-zinc-100 md:text-lg">
                 Build an architecture that scales
               </h1>
               <p className="mx-auto max-w-sm text-xs leading-relaxed text-zinc-400 md:text-sm">
                 Pick a problem, drop infrastructure components onto the canvas, and get scored the way an interviewer would evaluate you.
               </p>
-            </div>
+            </motion.div>
 
-            <div className="grid w-full gap-2 sm:grid-cols-3">
+            <motion.div variants={emptyItem} className="grid w-full gap-2 sm:grid-cols-3">
               <QuickStartCard
                 icon={<BookOpen className="h-3.5 w-3.5" />}
                 title="Pick a problem"
@@ -246,9 +266,9 @@ export function DesignCanvas({ onPickProblem, onLoadReference, onStartInterview 
                 onClick={onStartInterview}
                 accent
               />
-            </div>
+            </motion.div>
 
-            <div className="hidden flex-wrap items-center justify-center gap-3 text-[11px] text-zinc-500 md:flex">
+            <motion.div variants={emptyItem} className="hidden flex-wrap items-center justify-center gap-3 text-[11px] text-zinc-500 md:flex">
               <span className="flex items-center gap-1.5">
                 <MousePointer2 className="h-3 w-3" />
                 Drag from the sidebar
@@ -263,8 +283,8 @@ export function DesignCanvas({ onPickProblem, onLoadReference, onStartInterview 
                 <kbd className="rounded border border-zinc-700 bg-zinc-800 px-1.5 py-0.5 font-mono text-[10px]">⌘↵</kbd>
                 simulate
               </span>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
       )}
     </div>

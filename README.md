@@ -92,9 +92,16 @@ All values cross-checked against official docs and benchmarks.
 - **Kahn's topological sort** for correct fan-in QPS accumulation
 - **Smart traffic splitting** — Load balancers split evenly; other components fan-out 100% to each child
 - **Per-node metrics** — QPS, utilization %, latency, status (healthy / warning / critical)
+- **Delivered-throughput accounting** — reported throughput is capped at offered load and collapses through saturated nodes (no phantom over-capacity numbers)
+- **Disconnected-node aware** — stray nodes never steal traffic from the real request path
+- **Async-edge aware** — connections marked async are excluded from user-facing latency
 - **Bottleneck detection** with cascading failure visualization
-- **Cycle detection** with warnings
+- **Cycle detection** that separates true cycle members from nodes merely downstream of a cycle
 - **Configurable load** — 1K to 500K requests/sec
+
+### Connectivity-aware scoring
+
+Scoring evaluates the **wired request path**, not a parts bin — a canvas of disconnected components scores "Needs Work", and every check tells you when a component is placed but not connected. Each of the 5 categories is capped at exactly 20 points.
 
 ---
 
@@ -159,7 +166,7 @@ Click any edge to set protocol, sync/async mode, and a custom label.
 
 ### Concept Library
 
-Select any component to learn:
+Educational content for **every** infrastructure component. Select any component to learn:
 
 - **When to use** — concrete scenarios where this component shines
 - **When NOT to use** — common mistakes to avoid
@@ -172,9 +179,9 @@ Select any component to learn:
 
 ### Trade-off Decision Log
 
-14 pre-built trade-off cards with side-by-side comparisons:
+21 pre-built trade-off cards with side-by-side comparisons:
 
-SQL vs NoSQL | Push vs Pull | Sync vs Async | Strong vs Eventual Consistency | Monolith vs Microservices | REST vs gRPC | Cache-aside vs Write-through | Vertical vs Horizontal Scaling | Polling vs WebSocket | Single vs Multi-leader | Hash vs Range Partitioning | CDN Push vs Pull | Token Bucket vs Sliding Window | At-least-once vs Exactly-once
+SQL vs NoSQL | Push vs Pull | Sync vs Async | Strong vs Eventual Consistency | Monolith vs Microservices | REST vs gRPC | Cache-aside vs Write-through | Vertical vs Horizontal Scaling | Polling vs WebSocket | Single vs Multi-leader | Hash vs Range Partitioning | CDN Push vs Pull | Token Bucket vs Sliding Window | At-least-once vs Exactly-once Processing | Optimistic vs Pessimistic Locking | Long-polling vs SSE vs WebSocket | Kafka vs RabbitMQ | JWT vs Session Tokens | Normalization vs Denormalization | Batch vs Stream Processing | Active-active vs Active-passive
 
 Log your own decisions with rationale during practice.
 
@@ -243,6 +250,18 @@ Track completion with checkboxes. Concept prerequisites shown per problem.
 Each problem includes requirements (QPS, storage, latency), constraints, progressive hints, tags, and a reference architecture.
 
 ---
+
+### Mobile & Tablet
+
+Fully usable on touch devices:
+
+- **Tap-to-add** components (HTML5 drag-and-drop doesn't work on touch — tap the `+` or the row instead)
+- Left **library drawer** and right **bottom sheet** for panels; canvas stays full-bleed
+- Enlarged connection handles and a `connectionRadius` for finger-friendly wiring
+- **Remove Connection** button so edges are deletable without a keyboard
+- Two-row interview bar with controls always on-screen
+- Tap-to-edit text notes and rename custom components; pinch-zoom enabled
+- Safe-area insets respected; no horizontal overflow at 375px / 768px / 1024px+
 
 ## Quick Start
 

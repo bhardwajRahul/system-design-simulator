@@ -384,7 +384,7 @@ export function Walkthrough({ open, onClose, onPickProblem }: WalkthroughProps) 
         initial={{ opacity: 0, scale: 0.97 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.2, ease: EASE }}
-        className="relative flex w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-zinc-700/70 bg-zinc-900 shadow-[var(--shadow-e4)]"
+        className="relative flex max-h-[94dvh] w-full max-w-xl flex-col overflow-y-auto rounded-2xl border border-zinc-700/70 bg-zinc-900 shadow-[var(--shadow-e4)]"
       >
         {/* Progress segments */}
         <div className="flex gap-1 px-4 pt-4">
@@ -408,7 +408,7 @@ export function Walkthrough({ open, onClose, onPickProblem }: WalkthroughProps) 
         </button>
 
         {/* Stage */}
-        <div className="flex min-h-[220px] items-center justify-center px-8 py-8">
+        <div className="flex min-h-[180px] items-center justify-center px-6 py-6 sm:min-h-[220px] sm:px-8 sm:py-8">
           <AnimatePresence mode="wait">
             <motion.div
               key={scene.id}

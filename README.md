@@ -1,7 +1,7 @@
 <div align="center">
 
 <a href="https://github.com/vijaygupta18/system-design-simulator">
-  <img src="public/banner.svg" alt="SystemSim" width="900"/>
+  <img src="public/banner.svg" alt="SystemForge" width="900"/>
 </a>
 
 <br/><br/>
@@ -21,9 +21,9 @@
 
 ---
 
-## Why SystemSim?
+## Why SystemForge?
 
-Most system design prep is passive — reading articles, watching videos. SystemSim is **active practice**. You drag real infrastructure components onto a canvas, wire them together, simulate production-scale traffic, and get scored the way an interviewer would evaluate you.
+Most system design prep is passive — reading articles, watching videos. SystemForge is **active practice**. You drag real infrastructure components onto a canvas, wire them together, simulate production-scale traffic, and get scored the way an interviewer would evaluate you.
 
 It's the flight simulator for system design interviews.
 
@@ -342,7 +342,7 @@ src/
 
 ## ☕ Support
 
-If SystemSim helped you prep for a system design interview, a chai goes a long way to keep it alive and open-source. No pressure — no ads, no paywalls.
+If SystemForge helped you prep for a system design interview, a chai goes a long way to keep it alive and open-source. No pressure — no ads, no paywalls.
 
 [![Buy me a coffee](https://img.shields.io/badge/Buy%20me%20a%20coffee-UPI-06B6D4?style=for-the-badge&logo=buymeacoffee&logoColor=white)](#-buy-me-a-coffee)
 

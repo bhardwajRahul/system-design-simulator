@@ -6,7 +6,7 @@ Guidance for AI agents (and humans) working in this repo.
 
 ## What this is
 
-SystemSim — an open-source system-design interview simulator. Drag infrastructure components onto a React Flow canvas, wire them, simulate production-scale traffic (Kahn's topological sort), and get scored across 5 interview dimensions. 100% client-side; state persists to `localStorage`. No backend.
+SystemForge — an open-source system-design interview simulator. Drag infrastructure components onto a React Flow canvas, wire them, simulate production-scale traffic (Kahn's topological sort), and get scored across 5 interview dimensions. 100% client-side; state persists to `localStorage`. No backend.
 
 ## Commands
 

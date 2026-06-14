@@ -19,7 +19,7 @@ function upiIntent(amount?: number): string {
     pa: UPI_ID,
     pn: UPI_NAME,
     cu: "INR",
-    tn: "SystemSim support",
+    tn: "SystemForge support",
   });
   if (amount) params.set("am", String(amount));
   return `upi://pay?${params.toString()}`;
@@ -78,7 +78,7 @@ export function SupportDialog({ open, onClose }: SupportDialogProps) {
           </div>
 
           <h2 className="mt-4 text-lg font-semibold tracking-tight text-zinc-100">
-            Enjoying SystemSim?
+            Enjoying SystemForge?
           </h2>
           <p className="mx-auto mt-1.5 max-w-[280px] text-xs leading-relaxed text-zinc-400">
             If this helped you prep for a system design interview, a chai goes a long way to keep it alive and open-source.

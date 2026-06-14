@@ -165,7 +165,7 @@ export function TopBar({ onSimulate, onScore, onClearCanvas, onSave, onLoad, onS
         <div className="flex shrink-0 items-center gap-2">
           <Zap className="h-4 w-4 text-cyan-500" />
           <span className="hidden text-sm font-semibold tracking-tight text-zinc-100 sm:inline">
-            SystemSim
+            SystemForge
           </span>
         </div>
 
